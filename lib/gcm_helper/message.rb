@@ -15,23 +15,32 @@ module GcmHelper
       @data.store key, value
     end
 
-    def to_s
-      str = "Message(";
-      str << "collapseKey=#{collapse_key}," unless collapse_key.nil?
-      str << "timeToLive=#{time_to_live.to_i}," unless time_to_live.nil?
-      str << "delayWhileIdle=#{delay_while_idle? ? '1': '0'}," unless delay_while_idle.nil?
-
-      if (data.is_a?(Hash) && !data.empty?)
-        str << "data: {"
-        data.each {|key, value| str << key << "=" << value << ","}
-        str.chomp!(',')
-        str << "}"
+    def inspect
+      [:collapse_key, :delay_while_idle, :time_to_live, :data].inject({ }) do |h, attr|
+        h[attr] = instance_variable_get("@#{attr}")
+        h
       end
+    end
 
-      str.chomp!(',')
-      str << ")"
+    def to_s
+      "Message #{self.inspect.to_s}"
 
-      str
+      #str = "Message(";
+      #str << "collapseKey=#{collapse_key}," unless collapse_key.nil?
+      #str << "timeToLive=#{time_to_live.to_i}," unless time_to_live.nil?
+      #str << "delayWhileIdle=#{delay_while_idle? ? '1': '0'}," unless delay_while_idle.nil?
+      #
+      #if (data.is_a?(Hash) && !data.empty?)
+      #  str << "data: {"
+      #  data.each {|key, value| str << key << "=" << value << ","}
+      #  str.chomp!(',')
+      #  str << "}"
+      #end
+      #
+      #str.chomp!(',')
+      #str << ")"
+      #
+      #str
     end
   end
 end
