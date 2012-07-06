@@ -15,11 +15,11 @@ module GcmHelper
     end
 
     def self.new_body(name, value)
-      non_null(name) << '=' << non_null(value)
+      "#{non_null(name)}=#{non_null(value)}"
     end
 
     def self.add_parameter(body, name, value)
-      non_null(body) << '&' << non_null(name) << '=' << non_null(value)
+      non_null(body) << "&#{non_null(name)}=#{non_null(value)}"
     end
 
     # @param [GcmHelper::Message] message
