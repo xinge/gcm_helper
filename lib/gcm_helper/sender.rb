@@ -222,7 +222,7 @@ module GcmHelper
       unsent_reg_ids.each_with_index {|reg_id, index|
         result = results[index]
         all_results[reg_id]= result
-        new_unsent_reg_ids << reg_id unless (result.error_code.nil? || result.error.eql?(ERROR_UNAVAILABLE))
+        new_unsent_reg_ids << reg_id unless (result.error_code.nil? || result.error_code.eql?(ERROR_UNAVAILABLE))
       }
       new_unsent_reg_ids
     end
