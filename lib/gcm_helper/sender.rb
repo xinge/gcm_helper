@@ -104,7 +104,7 @@ module GcmHelper
       begin
         attempt += 1
         logger.debug("Sender") {"Attempt ##{attempt} to send message #{message} to regIds #{unsent_reg_ids}"}
-        multicast_result= multicast_no_retry(message, registration_ids)
+        multicast_result= multicast_no_retry(message, unsent_reg_ids)
         multicast_id = multicast_result.multicast_id
         logger.debug("Sender") {"multicast_id on attempt ##{attempt}: #{multicast_id}"}
         multicast_ids << multicast_id
